@@ -1,137 +1,149 @@
-<svg width="1600" height="980" viewBox="0 0 1600 980" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="1500" height="1240" viewBox="0 0 1500 1240" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <filter id="paperShadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#17324D" flood-opacity="0.12"/>
-    </filter>
-    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#245B8F"/>
-    </marker>
-    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#C96A2B"/>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
     </marker>
     <style>
-      .title { font: 700 38px 'Segoe UI', Arial, sans-serif; fill: #16324F; }
-      .subtitle { font: 500 18px 'Segoe UI', Arial, sans-serif; fill: #4A6178; }
-      .boxTitle { font: 700 24px 'Segoe UI', Arial, sans-serif; fill: #16324F; }
-      .boxText { font: 500 17px 'Segoe UI', Arial, sans-serif; fill: #21384D; }
-      .smallText { font: 500 15px 'Segoe UI', Arial, sans-serif; fill: #3F566B; }
-      .label { font: 700 15px 'Segoe UI', Arial, sans-serif; fill: #245B8F; }
-      .labelOrange { font: 700 15px 'Segoe UI', Arial, sans-serif; fill: #C96A2B; }
+      .bg { fill: #ffffff; }
+      .frame { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; }
+      .title { font: 700 30px 'Segoe UI', Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 15px 'Segoe UI', Arial, sans-serif; fill: #475569; }
+      .legend { font: 500 13px 'Segoe UI', Arial, sans-serif; fill: #475569; }
+      .node-title { font: 700 16px 'Segoe UI', Arial, sans-serif; fill: #0f172a; }
+      .node-text { font: 400 13px 'Segoe UI', Arial, sans-serif; fill: #334155; }
+      .core { fill: #f8fafc; stroke: #334155; stroke-width: 2; }
+      .support { fill: #ffffff; stroke: #64748b; stroke-width: 2; }
+      .flow { stroke: #334155; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .control { stroke: #64748b; stroke-width: 2; stroke-dasharray: 8 6; fill: none; marker-end: url(#arrow); }
     </style>
   </defs>
 
-  <rect width="1600" height="980" rx="28" fill="#F8F4EC"/>
-  <rect x="34" y="28" width="1532" height="924" rx="24" fill="#FFFDF9" stroke="#E2D9C7" stroke-width="2"/>
+  <rect class="bg" x="0" y="0" width="1500" height="1240"/>
+  <rect class="frame" x="30" y="30" width="1440" height="1180" rx="18"/>
 
-  <text x="800" y="86" text-anchor="middle" class="title">Architecture MLOps - Maintenance preventive</text>
-  <text x="800" y="116" text-anchor="middle" class="subtitle">Du cycle hydraulique brut jusqu'au monitoring, au tracking MLflow et a la CI GitHub</text>
+  <text x="70" y="78" class="title">Pipeline MLOps de maintenance predictive</text>
+  <text x="70" y="106" class="subtitle">Vue d'ensemble du flux de donnees, du serving, du monitoring et de l'automatisation.</text>
 
-  <g filter="url(#paperShadow)" transform="rotate(-1 150 220)">
-    <rect x="72" y="160" width="260" height="250" rx="22" fill="#FFF8E9" stroke="#D27C2C" stroke-width="4" stroke-dasharray="8 7"/>
-    <text x="202" y="205" text-anchor="middle" class="boxTitle">1. Donnees brutes</text>
-    <text x="102" y="245" class="boxText">- `data/raw/`</text>
-    <text x="102" y="277" class="boxText">- `PS2.txt` pression</text>
-    <text x="102" y="309" class="boxText">- `FS1.txt` debit</text>
-    <text x="102" y="341" class="boxText">- `profile.txt` cible</text>
-    <text x="102" y="385" class="smallText">Un cycle de production</text>
-    <text x="102" y="409" class="smallText">par ligne de donnees.</text>
+  <line x1="1040" y1="78" x2="1090" y2="78" class="flow"/>
+  <text x="1100" y="83" class="legend">Flux principal</text>
+  <line x1="1230" y1="78" x2="1280" y2="78" class="control"/>
+  <text x="1290" y="83" class="legend">Orchestration</text>
+
+  <g transform="translate(620 60)">
+    <rect class="core" width="260" height="96" rx="12"/>
+    <text x="20" y="32" class="node-title">Donnees brutes</text>
+    <text x="20" y="56" class="node-text">PS2.txt, FS1.txt, profile.txt</text>
+    <text x="20" y="76" class="node-text">Un cycle de production par ligne</text>
   </g>
 
-  <g filter="url(#paperShadow)" transform="rotate(1 470 220)">
-    <rect x="370" y="160" width="300" height="250" rx="22" fill="#F3FAFF" stroke="#245B8F" stroke-width="4" stroke-dasharray="8 7"/>
-    <text x="520" y="205" text-anchor="middle" class="boxTitle">2. Feature engineering</text>
-    <text x="400" y="245" class="boxText">- `engineering.py`</text>
-    <text x="400" y="277" class="boxText">- stats par cycle</text>
-    <text x="400" y="309" class="boxText">- moyennes, ecarts-types,</text>
-    <text x="400" y="337" class="boxText">  extrema, quantiles</text>
-    <text x="400" y="381" class="smallText">Sortie :</text>
-    <text x="400" y="405" class="smallText">`data/processed/feature_store.csv`</text>
+  <g transform="translate(620 210)">
+    <rect class="core" width="260" height="96" rx="12"/>
+    <text x="20" y="32" class="node-title">Feature engineering</text>
+    <text x="20" y="56" class="node-text">engineering.py</text>
+    <text x="20" y="76" class="node-text">Feature store: data/processed/feature_store.csv</text>
   </g>
 
-  <g filter="url(#paperShadow)" transform="rotate(-1 820 220)">
-    <rect x="712" y="160" width="320" height="250" rx="22" fill="#F5FBF5" stroke="#4D8C57" stroke-width="4" stroke-dasharray="8 7"/>
-    <text x="872" y="205" text-anchor="middle" class="boxTitle">3. Entrainement baseline</text>
-    <text x="742" y="245" class="boxText">- `train.py`</text>
-    <text x="742" y="277" class="boxText">- RandomForestClassifier</text>
-    <text x="742" y="309" class="boxText">- 2000 cycles train</text>
-    <text x="742" y="341" class="boxText">- 205 cycles test final</text>
-    <text x="742" y="381" class="smallText">Artefacts :</text>
-    <text x="742" y="405" class="smallText">modele, metrics, predictions</text>
+  <g transform="translate(620 360)">
+    <rect class="core" width="260" height="96" rx="12"/>
+    <text x="20" y="32" class="node-title">Training baseline</text>
+    <text x="20" y="56" class="node-text">train.py - RandomForestClassifier</text>
+    <text x="20" y="76" class="node-text">2000 cycles train, 205 cycles test</text>
   </g>
 
-  <g filter="url(#paperShadow)" transform="rotate(1 1195 220)">
-    <rect x="1088" y="160" width="300" height="250" rx="22" fill="#FFF7FB" stroke="#A45B8E" stroke-width="4" stroke-dasharray="8 7"/>
-    <text x="1238" y="205" text-anchor="middle" class="boxTitle">4. MLflow tracking</text>
-    <text x="1118" y="245" class="boxText">- tracking URI SQLite</text>
-    <text x="1118" y="277" class="boxText">- params</text>
-    <text x="1118" y="309" class="boxText">- metrics</text>
-    <text x="1118" y="341" class="boxText">- artefacts</text>
-    <text x="1118" y="381" class="smallText">UI locale :</text>
-    <text x="1118" y="405" class="smallText">`http://127.0.0.1:5000`</text>
+  <g transform="translate(960 360)">
+    <rect class="support" width="260" height="96" rx="12"/>
+    <text x="20" y="32" class="node-title">Versioning local</text>
+    <text x="20" y="56" class="node-text">dataset_version.json</text>
+    <text x="20" y="76" class="node-text">model_version.json</text>
   </g>
 
-  <path d="M332 285 C350 285, 355 285, 370 285" stroke="#245B8F" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
-  <path d="M670 285 C688 285, 694 285, 712 285" stroke="#245B8F" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
-  <path d="M1032 285 C1050 285, 1058 285, 1088 285" stroke="#245B8F" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
-
-  <text x="510" y="145" text-anchor="middle" class="label">transformation</text>
-  <text x="852" y="145" text-anchor="middle" class="label">apprentissage</text>
-  <text x="1210" y="145" text-anchor="middle" class="label">reproductibilite</text>
-
-  <g filter="url(#paperShadow)" transform="rotate(-1 410 600)">
-    <rect x="72" y="500" width="670" height="250" rx="24" fill="#F6FBFF" stroke="#245B8F" stroke-width="4" stroke-dasharray="8 7"/>
-    <text x="407" y="548" text-anchor="middle" class="boxTitle">5. Serving applicatif</text>
-    <text x="108" y="590" class="boxText">FastAPI :</text>
-    <text x="108" y="620" class="boxText">- `/predict/{cycle_id}`</text>
-    <text x="108" y="650" class="boxText">- `/model/metrics`</text>
-    <text x="108" y="680" class="boxText">- `/model/feature-importance`</text>
-    <text x="108" y="710" class="boxText">- `/metrics` Prometheus</text>
-
-    <text x="430" y="590" class="boxText">Interfaces :</text>
-    <text x="430" y="620" class="boxText">- UI web legere sur `/ui`</text>
-    <text x="430" y="650" class="boxText">- Streamlit `:8501`</text>
-    <text x="430" y="680" class="boxText">- API locale `:8010`</text>
-    <text x="430" y="710" class="boxText">- API Docker `:8011`</text>
+  <g transform="translate(280 360)">
+    <rect class="support" width="260" height="96" rx="12"/>
+    <text x="20" y="32" class="node-title">MLflow tracking</text>
+    <text x="20" y="56" class="node-text">params, metrics, artifacts</text>
+    <text x="20" y="76" class="node-text">Tracking UI sur :5000</text>
   </g>
 
-  <g filter="url(#paperShadow)" transform="rotate(1 1095 600)">
-    <rect x="820" y="500" width="560" height="250" rx="24" fill="#FFF9F2" stroke="#C96A2B" stroke-width="4" stroke-dasharray="8 7"/>
-    <text x="1100" y="548" text-anchor="middle" class="boxTitle">6. Monitoring et observabilite</text>
-    <text x="854" y="590" class="boxText">Prometheus :</text>
-    <text x="854" y="620" class="boxText">- scrape `/metrics`</text>
-    <text x="854" y="650" class="boxText">- compteurs HTTP</text>
-    <text x="854" y="680" class="boxText">- distribution des probabilites</text>
-
-    <text x="1110" y="590" class="boxText">Grafana :</text>
-    <text x="1110" y="620" class="boxText">- dashboards MLOps</text>
-    <text x="1110" y="650" class="boxText">- sante API</text>
-    <text x="1110" y="680" class="boxText">- visibilite demo soutenance</text>
+  <g transform="translate(620 620)">
+    <rect class="core" width="260" height="96" rx="12"/>
+    <text x="20" y="32" class="node-title">Artifacts locaux</text>
+    <text x="20" y="56" class="node-text">modele joblib, metrics json</text>
+    <text x="20" y="76" class="node-text">predictions csv</text>
   </g>
 
-  <path d="M872 410 C872 455, 520 455, 520 500" stroke="#245B8F" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
-  <path d="M1240 410 C1240 455, 1185 455, 1185 500" stroke="#A45B8E" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
-  <path d="M742 625 C782 625, 790 625, 820 625" stroke="#C96A2B" stroke-width="4" fill="none" marker-end="url(#arrowOrange)"/>
-
-  <text x="655" y="470" class="label">artefacts charges par l'API</text>
-  <text x="1160" y="470" class="label">runs, params, metrics</text>
-  <text x="785" y="604" text-anchor="middle" class="labelOrange">telemetrie</text>
-
-  <g filter="url(#paperShadow)" transform="rotate(-1 330 850)">
-    <rect x="72" y="800" width="540" height="120" rx="22" fill="#FCFBFF" stroke="#6A6EBB" stroke-width="4" stroke-dasharray="8 7"/>
-    <text x="342" y="842" text-anchor="middle" class="boxTitle">7. Docker Compose</text>
-    <text x="102" y="880" class="boxText">Services : api, streamlit, prometheus, mlflow, grafana</text>
-    <text x="102" y="905" class="smallText">Demarrage complet de la stack pour la demo et la reproductibilite locale.</text>
+  <g transform="translate(620 770)">
+    <rect class="core" width="260" height="96" rx="12"/>
+    <text x="20" y="32" class="node-title">FastAPI serving</text>
+    <text x="20" y="56" class="node-text">/predict, /model/metrics, /metrics</text>
+    <text x="20" y="76" class="node-text">API locale :8010, Docker :8011</text>
   </g>
 
-  <g filter="url(#paperShadow)" transform="rotate(1 985 850)">
-    <rect x="690" y="800" width="698" height="120" rx="22" fill="#F9FFF7" stroke="#4D8C57" stroke-width="4" stroke-dasharray="8 7"/>
-    <text x="1039" y="842" text-anchor="middle" class="boxTitle">8. GitHub Actions</text>
-    <text x="720" y="880" class="boxText">CI : checkout, setup-python, installation, build features, train baseline, pytest, docker build</text>
-    <text x="720" y="905" class="smallText">Uploads : baseline metrics et predictions en artefacts de workflow.</text>
+  <g transform="translate(280 770)">
+    <rect class="support" width="260" height="96" rx="12"/>
+    <text x="20" y="32" class="node-title">UI web legere</text>
+    <text x="20" y="56" class="node-text">Interface servie par FastAPI</text>
+    <text x="20" y="76" class="node-text">Disponible sur /ui</text>
   </g>
 
-  <path d="M342 750 C342 780, 342 785, 342 800" stroke="#245B8F" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
-  <path d="M1110 750 C1110 780, 1110 785, 1110 800" stroke="#4D8C57" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+  <g transform="translate(960 770)">
+    <rect class="support" width="260" height="96" rx="12"/>
+    <text x="20" y="32" class="node-title">Streamlit</text>
+    <text x="20" y="56" class="node-text">Visualisation temporelle</text>
+    <text x="20" y="76" class="node-text">Disponible sur :8501</text>
+  </g>
 
-  <text x="800" y="955" text-anchor="middle" class="smallText">Fichier recommande pour la soutenance : assets/maintenance_mlops_architecture.svg</text>
+  <g transform="translate(620 920)">
+    <rect class="core" width="260" height="96" rx="12"/>
+    <text x="20" y="32" class="node-title">Prometheus</text>
+    <text x="20" y="56" class="node-text">Scrape de /metrics</text>
+    <text x="20" y="76" class="node-text">Metriques techniques et applicatives</text>
+  </g>
+
+  <g transform="translate(620 1070)">
+    <rect class="core" width="260" height="96" rx="12"/>
+    <text x="20" y="32" class="node-title">Grafana</text>
+    <text x="20" y="56" class="node-text">Dashboards d'exploitation</text>
+    <text x="20" y="76" class="node-text">Visualisation sur :3000</text>
+  </g>
+
+  <g transform="translate(280 920)">
+    <rect class="support" width="260" height="96" rx="12"/>
+    <text x="20" y="32" class="node-title">Docker Compose</text>
+    <text x="20" y="56" class="node-text">api, streamlit, prometheus</text>
+    <text x="20" y="76" class="node-text">mlflow, grafana</text>
+  </g>
+
+  <g transform="translate(960 920)">
+    <rect class="support" width="260" height="96" rx="12"/>
+    <text x="20" y="32" class="node-title">GitHub Actions</text>
+    <text x="20" y="56" class="node-text">fetch dataset, build, train, test</text>
+    <text x="20" y="76" class="node-text">validation docker</text>
+  </g>
+
+  <path d="M750 156 L750 210" class="flow"/>
+  <path d="M750 306 L750 360" class="flow"/>
+  <path d="M750 456 L750 620" class="flow"/>
+  <path d="M750 716 L750 770" class="flow"/>
+  <path d="M750 866 L750 920" class="flow"/>
+  <path d="M750 1016 L750 1070" class="flow"/>
+
+  <path d="M880 408 L960 408" class="flow"/>
+  <path d="M960 408 C960 520 830 520 750 620" class="flow"/>
+  <path d="M620 408 L540 408" class="flow"/>
+
+  <path d="M620 818 L540 818" class="flow"/>
+  <path d="M880 818 L960 818" class="flow"/>
+  <path d="M750 866 C750 900 750 900 750 920" class="flow"/>
+
+  <path d="M1090 866 C1090 900 1040 900 880 968" class="flow"/>
+
+  <path d="M1090 968 C1090 780 1110 620 1220 620" class="control"/>
+  <path d="M1090 968 C1090 700 1110 430 860 408" class="control"/>
+  <path d="M1090 968 C1090 760 1110 520 860 258" class="control"/>
+
+  <path d="M540 968 C620 968 620 860 620 818" class="control"/>
+  <path d="M540 968 C620 968 980 818 960 818" class="control"/>
+  <path d="M540 968 C610 968 680 968 620 968" class="control"/>
+
+  <text x="70" y="1188" class="legend">Fichier asset SVG sobre pour slides, README ou support PDF.</text>
 </svg>
