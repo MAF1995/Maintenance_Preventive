@@ -1,14 +1,12 @@
-<div align="center" style="font-family: Garamond, Georgia, serif;">
-  <h1>Pipeline MLOps de Maintenance Prédictive</h1>
-  <p><strong>Prédiction de la condition de valve d'un système hydraulique industriel</strong></p>
-  <p>Projet 2025-2026 orienté Data Science, industrialisation MLOps, observabilité et soutenance technique.</p>
-</div>
+# Pipeline MLOps de Maintenance Prédictive
+
+**Prédiction de la condition de valve d'un système hydraulique industriel**
+
+Projet orienté Data Science, industrialisation MLOps et mise en production d'un modèle de classification.
 
 Ce projet répond à un cas de maintenance prédictive: à partir des signaux `PS2`, `FS1` et `profile`, on construit un pipeline complet capable de préparer les données, entraîner un modèle, versionner les sorties, exposer une prédiction par API, visualiser les résultats et monitorer l'ensemble avec Prometheus, Grafana et MLflow.
 
 ## Pipeline MLOps de maintenance predictive
-
-Le même diagramme est disponible dans [architecture.md](architecture.md) en version isolée et dans `assets/maintenance_mlops_architecture.svg` en version image.
 
 ```mermaid
 flowchart LR
@@ -53,7 +51,6 @@ flowchart LR
 1. Objectif métier: prédire si la condition de valve d'un cycle est optimale (`100 %`) ou non.
 2. Contrainte imposée: les `2000` premiers cycles servent à l'apprentissage et les `205` derniers au test final.
 3. Entrées autorisées: `PS2.txt`, `FS1.txt` et `profile.txt`.
-4. Livrable visé: dépôt Git, tests, Docker, application web, versioning, CI/CD, monitoring et support d'explication.
 
 ## Ce que contient le dépôt
 
@@ -78,19 +75,6 @@ flowchart LR
 |-- requirements.txt
 `-- README.md
 ```
-
-## Livrables couverts
-
-| Exigence | Réponse actuelle | Preuve dans le dépôt |
-|---|---|---|
-| Code du projet sur GitHub ou GitLab | Dépôt prêt à publier | Structure complète du repo |
-| Tests unitaires | Oui | `tests/` + `pytest` |
-| Containerisation | Oui | `Dockerfile` + `docker-compose.yml` |
-| Application web de prédiction | Oui | `frontend/` + `dashboard/` + API FastAPI |
-| Versioning du modèle et du dataset | Oui, version locale légère | `artifacts/metadata/dataset_version.json`, `artifacts/metadata/model_version.json`, MLflow |
-| Système de déploiement via CI/CD | CI prête, CD à renforcer | `.github/workflows/ci.yml` |
-| Monitoring | Oui | `monitoring/`, Prometheus, Grafana |
-| Support de restitution | Oui | `README.md` + `architecture.md` |
 
 ## Résultats actuels du baseline
 
@@ -224,13 +208,9 @@ Cette approche répond à l'exigence de reproductibilité sans alourdir le proje
 Deux interfaces sont disponibles:
 
 1. Une UI web légère servie par FastAPI sur `/ui`.
-2. Un dashboard Streamlit orienté démonstration sur `:8501`.
+2. Un dashboard Streamlit sur `:8501`.
 
-Le dashboard Streamlit présente maintenant une lecture chronologique des cycles:
-1. courbe de l'efficacité réelle de la valve;
-2. courbe de probabilité prédite;
-3. fenêtre temporelle sélectionnable;
-4. focus sur un cycle particulier.
+Le dashboard Streamlit propose une lecture temporelle du test final avec visualisation de la condition réelle de la valve, de la probabilité prédite et d'une fenêtre de cycles sélectionnable.
 
 ## CI/CD actuel
 
@@ -244,48 +224,6 @@ Le workflow GitHub Actions actuel:
 7. archive les artefacts utiles;
 8. valide `docker build`;
 9. valide `docker compose config`.
-
-Ce pipeline est déjà une bonne CI de projet MLOps, car il rejoue les étapes critiques du projet de bout en bout.
-
-## Comment améliorer le CI/CD
-
-La partie CI est déjà solide, mais la partie CD peut être renforcée.
-
-1. Publier automatiquement l'image Docker dans GHCR sur `main` ou sur tag.
-2. Ajouter un job de smoke test qui démarre la stack et teste `/health`, `/ui` et `/metrics`.
-3. Déployer automatiquement sur une cible de démonstration après validation, par exemple Render, Railway, Azure Container Apps ou un VPS.
-4. Ajouter une stratégie de versionnement sémantique des releases.
-5. Gérer les secrets via GitHub Actions Secrets plutôt que des valeurs de démo dès qu'un vrai environnement existe.
-6. Ajouter un contrôle de qualité supplémentaire: linting, sécurité des dépendances et tests API.
-
-En l'état, on peut parler honnêtement de `CI prête` et de `CD amorcé mais améliorable`.
-
-## Ce qui part sur GitHub et ce qui reste local
-
-### Embarqué dans le dépôt
-
-1. Le code source `src/`.
-2. Les scripts `scripts/`.
-3. Les tests `tests/`.
-4. Les dashboards et le monitoring `dashboard/`, `frontend/`, `monitoring/`.
-5. La CI `.github/workflows/ci.yml`.
-6. Le `README`, `architecture.md`, `Dockerfile`, `docker-compose.yml`, `LICENSE`.
-7. Les squelettes légers de `data/`, `artifacts/` et `ressources/`.
-
-### Conservé en local
-
-1. `.venv/`, `.vscode/`, `.pytest_cache/`.
-2. Les données brutes réellement embarquées, récupérées à la demande via `scripts/fetch-dataset.ps1` ou par la CI.
-3. Les artefacts générés au fil des exécutions.
-4. Les exports MLflow lourds.
-5. Le PDF de consigne et les archives source si vous décidez de ne pas les publier.
-
-## Limites actuelles
-
-1. Le modèle est un baseline RandomForest, pas encore un benchmark multi-modèles.
-2. Le CD n'effectue pas encore un déploiement automatique sur un environnement distant.
-3. Le versioning est local et léger, pas encore outillé via DVC ou registry complet.
-4. Les métriques de dérive ou de qualité de données en production peuvent encore être enrichies.
 
 ## Sources, crédentiels et réutilisabilité
 
