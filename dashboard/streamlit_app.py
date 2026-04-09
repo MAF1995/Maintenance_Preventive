@@ -110,8 +110,8 @@ st.markdown(
 
 st.title("Maintenance Preventive Dashboard")
 st.caption(
-    "Vue de demo pour la soutenance : metriques du modele, importance des variables et lecture "
-    "chronologique de l'efficacite de la valve."
+    "Vue de supervision du modele : metriques, variables les plus contributives "
+    "et lecture chronologique de la condition de la valve."
 )
 st.caption(f"API cible : {API_BASE_URL}")
 

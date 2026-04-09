@@ -3,21 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Maintenance Preventive UI</title>
+    <title>Maintenance Predictive Dashboard</title>
     <link rel="stylesheet" href="/ui-assets/style.css" />
   </head>
   <body>
     <main class="page-shell">
       <section class="hero">
-        <p class="eyebrow">Maintenance Preventive MLOps</p>
-        <h1>Interface web de démonstration</h1>
+        <p class="eyebrow">Maintenance Predictive Platform</p>
+        <h1>Tableau de bord de la performance valve</h1>
         <p class="hero-copy">
-          Vue légère servie directement par l'API pour présenter le modèle, les métriques, les prédictions
-          et la partie interactive sans dépendre de Streamlit.
+          Interface légère exposée par l'API pour consulter les indicateurs du modèle,
+          les variables les plus contributives et le scoring d'un cycle de production.
         </p>
         <div class="hero-links">
-          <a href="/docs" target="_blank" rel="noreferrer">Swagger</a>
-          <a href="/metrics" target="_blank" rel="noreferrer">Prometheus metrics</a>
+          <a href="/docs" target="_blank" rel="noreferrer">Documentation API</a>
+          <a href="/metrics" target="_blank" rel="noreferrer">Métriques Prometheus</a>
         </div>
       </section>
 
@@ -42,7 +42,7 @@
 
       <section class="panel-grid">
         <article class="panel">
-          <h2>Top features</h2>
+          <h2>Variables les plus contributives</h2>
           <div id="feature-importance" class="bar-list"></div>
         </article>
 
@@ -53,26 +53,26 @@
       </section>
 
       <section class="panel">
-        <h2>Prédiction interactive</h2>
+        <h2>Scoring d'un cycle</h2>
         <div class="predict-form">
-          <label for="cycle-id">Numéro de cycle</label>
+          <label for="cycle-id">Identifiant du cycle</label>
           <input id="cycle-id" type="number" min="1" max="2205" value="2001" />
-          <button id="predict-button" type="button">Prédire</button>
+          <button id="predict-button" type="button">Lancer le scoring</button>
         </div>
         <div id="prediction-result" class="prediction-result"></div>
       </section>
 
       <section class="panel">
-        <h2>Extrait des prédictions de test</h2>
+        <h2>Échantillon des prédictions du jeu de test</h2>
         <div class="table-wrapper">
           <table id="sample-table">
             <thead>
               <tr>
                 <th>Cycle</th>
-                <th>Valve réelle</th>
-                <th>Label réel</th>
-                <th>Label prédit</th>
-                <th>Probabilité</th>
+                <th>Valve observée (%)</th>
+                <th>Classe observée</th>
+                <th>Classe prédite</th>
+                <th>Probabilité prédite</th>
               </tr>
             </thead>
             <tbody></tbody>

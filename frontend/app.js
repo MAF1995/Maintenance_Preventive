@@ -77,9 +77,9 @@ function renderPredictionResult(prediction) {
   const container = document.getElementById("prediction-result");
   container.innerHTML = `
     <div class="prediction-card"><strong>Classe prédite</strong><div>${prediction.predicted_class_name}</div></div>
-    <div class="prediction-card"><strong>Probabilité</strong><div>${Number(prediction.predicted_probability).toFixed(3)}</div></div>
-    <div class="prediction-card"><strong>Label binaire</strong><div>${prediction.predicted_label}</div></div>
-    <div class="prediction-card"><strong>Valve réelle</strong><div>${prediction.actual_valve_pct}</div></div>
+    <div class="prediction-card"><strong>Probabilité associée</strong><div>${Number(prediction.predicted_probability).toFixed(3)}</div></div>
+    <div class="prediction-card"><strong>Décision du modèle</strong><div>${prediction.predicted_label}</div></div>
+    <div class="prediction-card"><strong>Valve observée (%)</strong><div>${prediction.actual_valve_pct}</div></div>
   `;
 }
 
@@ -106,8 +106,8 @@ async function bootstrapUi() {
   } catch (error) {
     document.querySelector(".page-shell").innerHTML = `
       <section class="panel">
-        <h1>Impossible de charger l'interface</h1>
-        <p>Vérifiez que l'API locale ou Docker est bien démarrée avec les endpoints <code>/model/metrics</code> et <code>/predict/{cycle_id}</code>.</p>
+        <h1>Chargement de l'interface impossible</h1>
+        <p>Vérifiez que l'API est accessible et que les endpoints <code>/model/metrics</code> et <code>/predict/{cycle_id}</code> répondent correctement.</p>
         <pre>${error.message}</pre>
       </section>
     `;
@@ -120,7 +120,7 @@ document.getElementById("predict-button").addEventListener("click", async () => 
     const prediction = await fetchJson(`/predict/${cycleId}`);
     renderPredictionResult(prediction);
   } catch (error) {
-    document.getElementById("prediction-result").innerHTML = `<div class="prediction-card">Erreur : ${error.message}</div>`;
+    document.getElementById("prediction-result").innerHTML = `<div class="prediction-card"><strong>Erreur de scoring</strong><div>${error.message}</div></div>`;
   }
 });
 
