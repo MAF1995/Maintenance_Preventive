@@ -57,13 +57,13 @@ flowchart LR
 ```text
 .
 |-- .github/workflows/ci.yml
-|-- assets/
 |-- artifacts/
 |-- dashboard/
 |-- data/
 |-- frontend/
 |-- monitoring/
 |-- ressources/
+|-- screenshots/
 |-- scripts/
 |-- src/maintenance_preventive/
 |-- tests/
@@ -80,15 +80,16 @@ flowchart LR
 
 Les métriques sont produites dans `artifacts/metrics/baseline_metrics.json`.
 
-| Métrique | Valeur |
-|---|---|
-| Accuracy | `0.8488` |
+| Métrique | Valeur     |
+| --------- | ---------- |
+| Accuracy  | `0.8488` |
 | Precision | `0.7019` |
-| Recall | `1.0000` |
-| F1 | `0.8249` |
-| ROC AUC | `0.9975` |
+| Recall    | `1.0000` |
+| F1        | `0.8249` |
+| ROC AUC   | `0.9975` |
 
 Lecture rapide:
+
 1. Le rappel à `1.0` montre qu'aucun cycle non optimal n'est manqué dans le test final.
 2. La précision plus basse indique qu'il reste des faux positifs.
 3. Le ROC AUC très élevé confirme une bonne séparation globale des classes.
@@ -150,24 +151,25 @@ Les interfaces ne s'ouvrent pas automatiquement.
 
 ### Local
 
-| Service | Adresse |
-|---|---|
-| API FastAPI | `http://127.0.0.1:8010/docs` |
-| UI web légère | `http://127.0.0.1:8010/ui` |
-| MLflow | `http://127.0.0.1:5000` |
+| Service         | Adresse                        |
+| --------------- | ------------------------------ |
+| API FastAPI     | `http://127.0.0.1:8010/docs` |
+| UI web légère | `http://127.0.0.1:8010/ui`   |
+| MLflow          | `http://127.0.0.1:5000`      |
 
 ### Docker
 
-| Service | Adresse |
-|---|---|
-| API FastAPI | `http://127.0.0.1:8011/docs` |
-| UI web légère | `http://127.0.0.1:8011/ui` |
-| Streamlit | `http://127.0.0.1:8501` |
-| Prometheus | `http://127.0.0.1:9090` |
-| MLflow | `http://127.0.0.1:5000` |
-| Grafana | `http://127.0.0.1:3000` |
+| Service         | Adresse                        |
+| --------------- | ------------------------------ |
+| API FastAPI     | `http://127.0.0.1:8011/docs` |
+| UI web légère | `http://127.0.0.1:8011/ui`   |
+| Streamlit       | `http://127.0.0.1:8501`      |
+| Prometheus      | `http://127.0.0.1:9090`      |
+| MLflow          | `http://127.0.0.1:5000`      |
+| Grafana         | `http://127.0.0.1:3000`      |
 
 Crédentiels de démonstration Grafana:
+
 1. Utilisateur: `admin`
 2. Mot de passe: `admin`
 
@@ -186,11 +188,18 @@ powershell -ExecutionPolicy Bypass -File .\scripts\stop-mlops-stack.ps1
 ```
 
 Les conteneurs ont des noms explicites pour éviter les suffixes automatiques de type `-1`:
+
 1. `maintenance_preventive_api`
 2. `maintenance_preventive_streamlit`
 3. `maintenance_preventive_prometheus`
 4. `maintenance_preventive_mlflow`
 5. `maintenance_preventive_grafana`
+
+### Monitoring
+
+![Dashboard Grafana](screenshots/grafana-dashboard.png)
+
+![Cibles Prometheus](screenshots/prometheus-targets.png)
 
 ## Versioning du dataset et du modèle
 
@@ -203,6 +212,12 @@ Le projet ne se limite plus à un simple export de fichiers.
 
 Cette approche répond à l'exigence de reproductibilité sans alourdir le projet avec une stack de registry plus complexe.
 
+### Tracking des runs
+
+![Vue d'ensemble MLflow](screenshots/mlflow-overview.png)
+
+![Run baseline dans MLflow](screenshots/mlflow-baseline-run.png)
+
 ## Application web fonctionnelle
 
 Deux interfaces sont disponibles:
@@ -212,9 +227,14 @@ Deux interfaces sont disponibles:
 
 Le dashboard Streamlit propose une lecture temporelle du test final avec visualisation de la condition réelle de la valve, de la probabilité prédite et d'une fenêtre de cycles sélectionnable.
 
+### Interface web
+
+![Interface web de scoring](screenshots/ui-web-dashboard.png)
+
 ## CI/CD actuel
 
 Le workflow GitHub Actions actuel:
+
 1. installe Python `3.10`;
 2. installe les dépendances;
 3. télécharge automatiquement `PS2.txt`, `FS1.txt` et `profile.txt` depuis UCI;
@@ -224,6 +244,10 @@ Le workflow GitHub Actions actuel:
 7. archive les artefacts utiles;
 8. valide `docker build`;
 9. valide `docker compose config`.
+
+### Validation continue
+
+![Workflow GitHub Actions](screenshots/github-actions-ci.png)
 
 ## Sources, crédentiels et réutilisabilité
 
