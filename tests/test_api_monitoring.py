@@ -39,4 +39,5 @@ def test_web_ui_route_serves_html():
     response = client.get("/ui")
 
     assert response.status_code == 200
-    assert "Interface web de démonstration" in response.text
+    assert "Maintenance Preventive MLOps | Interface Web" in response.text
+    assert "Interface web d'analyse et de scoring" in response.text
