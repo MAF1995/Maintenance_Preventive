@@ -6,6 +6,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from maintenance_preventive.config import (
+    DATASET_DOI,
+    DATASET_LICENSE,
+    DATASET_SOURCE_URL,
     DATASET_MANIFEST_PATH,
     FEATURE_STORE_PATH,
     FS1_PATH,
@@ -13,11 +16,6 @@ from maintenance_preventive.config import (
     PROFILE_PATH,
     PS2_PATH,
 )
-
-
-DATASET_SOURCE_URL = "https://archive.ics.uci.edu/dataset/447/condition+monitoring+of+hydraulic+systems"
-DATASET_DOI = "10.24432/C5CW21"
-DATASET_LICENSE = "CC BY 4.0"
 
 
 def _sha256(path: Path) -> str:

@@ -9,6 +9,12 @@ from maintenance_preventive.config import FS1_PATH, PROFILE_COLUMNS, PROFILE_PAT
 
 def load_sensor_matrix(path: Path) -> pd.DataFrame:
     """Load one tab-delimited sensor matrix where each row is a cycle."""
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Fichier introuvable: {path}. "
+            "Executez `python -m maintenance_preventive.data.fetch_dataset` "
+            "ou `powershell -ExecutionPolicy Bypass -File .\\scripts\\fetch-dataset.ps1`."
+        )
     return pd.read_csv(path, sep=r"\s+", header=None, engine="python")
 
 
@@ -21,6 +27,12 @@ def load_fs1() -> pd.DataFrame:
 
 
 def load_profile() -> pd.DataFrame:
+    if not PROFILE_PATH.exists():
+        raise FileNotFoundError(
+            f"Fichier introuvable: {PROFILE_PATH}. "
+            "Executez `python -m maintenance_preventive.data.fetch_dataset` "
+            "ou `powershell -ExecutionPolicy Bypass -File .\\scripts\\fetch-dataset.ps1`."
+        )
     return pd.read_csv(
         PROFILE_PATH,
         sep=r"\s+",

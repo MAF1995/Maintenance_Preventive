@@ -117,37 +117,43 @@ Lecture rapide:
 powershell -ExecutionPolicy Bypass -File .\scripts\setup-venv.ps1
 ```
 
-2. Construire le feature store.
+2. Télécharger automatiquement le dataset brut si besoin.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\fetch-dataset.ps1
+```
+
+3. Construire le feature store.
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\build-features.ps1
 ```
 
-3. Entraîner le modèle baseline et produire les manifests de versioning.
+4. Entraîner le modèle baseline et produire les manifests de versioning.
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\train-model.ps1
 ```
 
-4. Lancer l'API locale.
+5. Lancer l'API locale.
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\run-api.ps1
 ```
 
-5. Lancer MLflow.
+6. Lancer MLflow.
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\run-mlflow.ps1
 ```
 
-6. Lancer Streamlit si besoin.
+7. Lancer Streamlit si besoin.
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\run-dashboard.ps1
 ```
 
-7. Exécuter les tests.
+8. Exécuter les tests.
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
@@ -231,12 +237,13 @@ Le dashboard Streamlit présente maintenant une lecture chronologique des cycles
 Le workflow GitHub Actions actuel:
 1. installe Python `3.10`;
 2. installe les dépendances;
-3. reconstruit le feature store;
-4. entraîne le baseline;
-5. lance `pytest`;
-6. archive les artefacts utiles;
-7. valide `docker build`;
-8. valide `docker compose config`.
+3. télécharge automatiquement `PS2.txt`, `FS1.txt` et `profile.txt` depuis UCI;
+4. reconstruit le feature store;
+5. entraîne le baseline;
+6. lance `pytest`;
+7. archive les artefacts utiles;
+8. valide `docker build`;
+9. valide `docker compose config`.
 
 Ce pipeline est déjà une bonne CI de projet MLOps, car il rejoue les étapes critiques du projet de bout en bout.
 
@@ -268,7 +275,7 @@ En l'état, on peut parler honnêtement de `CI prête` et de `CD amorcé mais am
 ### Conservé en local
 
 1. `.venv/`, `.vscode/`, `.pytest_cache/`.
-2. Les données brutes réellement embarquées.
+2. Les données brutes réellement embarquées, récupérées à la demande via `scripts/fetch-dataset.ps1` ou par la CI.
 3. Les artefacts générés au fil des exécutions.
 4. Les exports MLflow lourds.
 5. Le PDF de consigne et les archives source si vous décidez de ne pas les publier.

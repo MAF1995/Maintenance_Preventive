@@ -27,6 +27,9 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
 
+      - name: Fetch dataset subset
+        run: python -m maintenance_preventive.data.fetch_dataset
+
       - name: Build feature store
         run: python -m maintenance_preventive.features.engineering
 
