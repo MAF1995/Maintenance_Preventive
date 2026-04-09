@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maintenance Preventive UI</title>
+    <link rel="stylesheet" href="/ui-assets/style.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="hero">
+        <p class="eyebrow">Maintenance Preventive MLOps</p>
+        <h1>Interface web de démonstration</h1>
+        <p class="hero-copy">
+          Vue légère servie directement par l'API pour présenter le modèle, les métriques, les prédictions
+          et la partie interactive sans dépendre de Streamlit.
+        </p>
+        <div class="hero-links">
+          <a href="/docs" target="_blank" rel="noreferrer">Swagger</a>
+          <a href="/metrics" target="_blank" rel="noreferrer">Prometheus metrics</a>
+        </div>
+      </section>
+
+      <section class="metrics-grid" id="metrics-grid">
+        <article class="metric-card">
+          <h2>Accuracy</h2>
+          <p id="metric-accuracy">...</p>
+        </article>
+        <article class="metric-card">
+          <h2>F1</h2>
+          <p id="metric-f1">...</p>
+        </article>
+        <article class="metric-card">
+          <h2>ROC AUC</h2>
+          <p id="metric-roc">...</p>
+        </article>
+        <article class="metric-card">
+          <h2>Cycles de test</h2>
+          <p id="metric-test-cycles">...</p>
+        </article>
+      </section>
+
+      <section class="panel-grid">
+        <article class="panel">
+          <h2>Top features</h2>
+          <div id="feature-importance" class="bar-list"></div>
+        </article>
+
+        <article class="panel">
+          <h2>Matrice de confusion</h2>
+          <div id="confusion-grid" class="confusion-grid"></div>
+        </article>
+      </section>
+
+      <section class="panel">
+        <h2>Prédiction interactive</h2>
+        <div class="predict-form">
+          <label for="cycle-id">Numéro de cycle</label>
+          <input id="cycle-id" type="number" min="1" max="2205" value="2001" />
+          <button id="predict-button" type="button">Prédire</button>
+        </div>
+        <div id="prediction-result" class="prediction-result"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Extrait des prédictions de test</h2>
+        <div class="table-wrapper">
+          <table id="sample-table">
+            <thead>
+              <tr>
+                <th>Cycle</th>
+                <th>Valve réelle</th>
+                <th>Label réel</th>
+                <th>Label prédit</th>
+                <th>Probabilité</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="/ui-assets/app.js"></script>
+  </body>
+</html>
